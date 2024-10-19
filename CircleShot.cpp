@@ -1,64 +1,29 @@
 #include "CircleShot.h"
 #include<DxLib.h>
-Enemy_A Flag;
+
 CircleShot::CircleShot()
 {
-	count = std::make_unique<int>(30);
-	angle = std::make_unique<float[]>(2560);
-	angle2 = std::make_unique<float[]>(2560);
-	bullet = std::make_unique<int[]>(2560);
-	x = std::make_unique<float[]>(2560);
-	y = std::make_unique<float[]>(2560);
-	max = std::make_unique<int>(30);
-	handle = std::make_unique<int>(0);
-	gamecount2 = std::make_unique<int>(20);
-	gamecount = std::make_unique<int>(0);
+	
 }
 
-void CircleShot::SetX(float _x[])
-{
-	for (int i = 0; i < 300; i++)
-	{
-		x[i] = _x[i];
-	}
-}
-void CircleShot::SetY(float _y[])
-{
-	for (int i = 0; i < 300; i++)
-	{
 
-		y[i] = _y[i];
-	}
-}
-float CircleShot::GetY(){
-	for (int i = 0; i < 300; i++)
-	{
-		return y[i];
-	}
-}
-float CircleShot::GetX()
-{
-	for(int i=0;i<300;i++)
-	return x[i];
-}
-
-bool CircleShot::Initialize(float _x, float _y)
+bool CircleShot::Initialize(float px,float py ,float x, float y)
 {
 	if (Flag.GetFlag() == false) {
 
-		*max = 40;
-		for (int i = 0; i < *count; i++)
+		Setmax(40);
+		for (int i = 0; i < Getcount1(); i++)
 		{
 			angle[i] = (18 * i) * DX_PI / 180;
-			angle[i + *count] = (18 * i) * DX_PI / 180;
+			angle[i + Getcount1()] = (18 * i) * DX_PI / 180;
 			angle2[i] = ((18 * i) + 4) * DX_PI / 180;
-			angle2[i + *count] = ((18 * i) - 4) * DX_PI / 180;
+			angle2[i +Getcount1()] = ((18 * i) - 4) * DX_PI / 180;
 
 		}
 		for (int j = 0; j < 300; j++)
 		{
-			x[j] = _x;
-			y[j] = _y;
+			_x[j] = x;
+			_y[j] = y;
 		}
 		Flag.SetFlag(true);
 	}
@@ -66,46 +31,48 @@ bool CircleShot::Initialize(float _x, float _y)
 	return true;
 }
 
-bool CircleShot::update(float _x, float _y)
+bool CircleShot::update(float px,float py,float x, float y)
 {
 	
 
-		for (int i = 0; i < *max; i++)
+		for (int i = 0; i < Getmax(); i++)
 		{
-			if (x[i]<80 && x[i]>-80 && y[i]<80 && y[i]>-80)
+			if (_x[i]<80 && _x[i]>-80 && _y[i]<80 && _y[i]>-80)
 			{
-				x[i] += cos(angle[i % 40]) * 2;
-				y[i] += sin(angle[i % 40]) * 2;
+				_x[i] += cos(angle[i % 40]) * 2;
+				_y[i] += sin(angle[i % 40]) * 2;
 			}
 			else
 			{
-				x[i] += cos(angle2[i % 40]) * 2;
-				y[i] += sin(angle2[i % 40]) * 2;
+				_x[i] += cos(angle2[i % 40]) * 2;
+				_y[i] += sin(angle2[i % 40]) * 2;
 			}
 		}
-		if (*gamecount == *gamecount2)
+		if ( Getgamecount() == Getgamecount2())
 		{
-			if (*max < 280) {
-				*max += 40;
-				*gamecount2 += 20;
-				
+			if (Getmax() < 280) {
+				Setmax(*in);
+				Setgamecount2(*countgame);
+				*in += 20;
+				*countgame += 20;
 			}
 
 
 		
 		
 	}
-
-		*gamecount+=1;
+	*counter += 1;
+	Setgamecount(*counter);
+		
 	return true;
 
 }
 
-void  CircleShot::Draw()const
+void  CircleShot::Draw()
 {
 	*handle = LoadGraph("E:\\Aseprite\\bullet00003.png");
-	for (int i = 0; i < *max; i++) {
-		DrawGraph(x[i], y[i], *handle, true);
+	for (int i = 0; i < Getmax(); i++) {
+		DrawGraph(_x[i], _y[i], *handle, true);
 
 	}
 }

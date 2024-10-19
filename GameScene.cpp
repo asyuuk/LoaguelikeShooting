@@ -1,9 +1,12 @@
 #include "GameScene.h"
-#include"BulletManager.h"
-Player player;
-Enemy_A enemyA;
-CircleCollider collider;
-BulletManager bulletmanager;
+#include"EnemyManager.h"
+#include"CircleCollider.h"
+#include"Enemy_A.h"
+Player p;
+EnemyManager EM;
+
+
+
 BackGround background;
 GameScene::GameScene()
 {
@@ -12,17 +15,21 @@ GameScene::GameScene()
 
 void GameScene::update()
 {
-	player.update();
+
 	
-	bulletmanager.BulletSelect(0);
 }
 
 void GameScene::draw()
 {
-	//background.draw();
-	player.update();
-	player.draw();
-	EA.draw();
+	background.draw();
 
-	bulletmanager.BulletDraw(0);
+	EM.update();
+	p.update();
+	
+	
+	
+	EM.draw();
+	EM.Bulletdraw();
+
+	background.drawback();
 }

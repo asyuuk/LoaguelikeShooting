@@ -6,7 +6,8 @@
 #include<DxLib.h>
 #include<math.h>
 Player _player;
-Enemy_A  E;
+Enemy_A  EAc;
+Enemy_B EBc;
 RandamShot randomcollider;
 CircleShot circleshotcollider;
 
@@ -16,27 +17,39 @@ CircleCollider::CircleCollider()
 	_x1_1 = std::make_unique<float>(0);
 	_y1 = std::make_unique<float>(0);
 	_y1_2 = std::make_unique<float>(0);
+	_bx = std::make_unique<float[]>(2560);
+	_by = std::make_unique<float[]>(2560);
+	for (int i=0;i<2560;i++)
+	{
+		auto& ity = _by[i];
+		auto& it = _bx[i];
+		it = 0;
+		ity = 0;
+	}
 
 }
-bool CircleCollider::Player_EnemyA_update()
+bool CircleCollider::Player_EnemyA_update(float x,float  y,float ex,float ey)
 {
-	_player.update();
-	return Colliders(_player.GetX(), _player.GetY(),E.GetX(), E.GetY());
+
+	return Colliders(x,y,ex,ey);
 	
 }
 
-bool CircleCollider::Player_Bullet_update()
+
+bool CircleCollider::Player_Bullet_update(float x,float y,float ex[], float ey[])
 {
 
 
 	
-	return Colliders(_player.GetX(), _player.GetY(), circleshotcollider.GetX(), circleshotcollider.GetY());
+
+	
+	return BulletsColliders(x,y,ex, ey);
 }
 
 bool CircleCollider::Player_Bullet_update_Random()
 {
 	
-	randomcollider.Initialize(_player.GetX(), _player.GetY());
+	randomcollider.Initialize((float)_player.GetX(), (float)_player.GetY(),randomcollider.GetX(),randomcollider.GetY());
 
 	return Colliders(_player.GetX(), _player.GetY(), randomcollider.GetX(), randomcollider.GetY());
 }
@@ -61,11 +74,57 @@ bool CircleCollider::Colliders(float _x, float _y, float _x2, float _y2)
 	
 	if (r < rr)
 	{
-		DrawCircle(*_x1, *_y1, 10, GetColor(200, 0, 200));
-		DrawCircle(*_x1_1, *_y1_2, 10, GetColor(200, 0, 200));
+		DrawCircle((float)*_x1, (float) * _y1, 10, GetColor(200, 0, 200));
+		DrawCircle((float)*_x1_1, (float)*_y1_2, 10, GetColor(200, 0, 200));
 		
 		return false;
 	}
 
 	return true;
+}
+
+bool CircleCollider::BulletsColliders(float _x, float _y, float _x2[], float _y2[])
+{
+
+
+	*_x1 = _x;
+	*_y1 = _y;
+	for (int i = 0; i < 2560; i++)
+	{
+		auto& it = _bx[i];
+		it = _x2[i];
+		auto& ity = _by[i];
+		ity = _y2[i];
+
+	}
+
+	DrawCircle(*_x1, *_y1, 10, GetColor(255, 255, 0));
+	for (int i = 0; i < 2560; i++) {
+		auto& it = _bx[i];
+		auto& ity = _by[i];
+		DrawCircle((float)it,(float)ity , 10, GetColor(0, 255, 255));
+	}
+	
+	float x[2560], y[2560], r, r2, rr;
+	for (int i = 0; i < 2560; i++)
+	{
+		auto& it = _bx[i];
+		auto& ity = _by[i];
+
+		x[i] = *_x1 - it;
+		y[i] = *_y1 - ity;
+		r = pow(x[i], 2) + pow(y[i], 2);
+		
+		r2 = 2;
+		rr = 2 * 2;
+		if (r < rr)
+		{
+			DrawCircle((float)*_x1, (float)*_y1, 2, GetColor(230, 0, 123));
+			DrawCircle((float)it, (float)ity, 2, GetColor(224, 245, 244));
+			return  false;
+		}
+		return true;
+	}
+
+	
 }

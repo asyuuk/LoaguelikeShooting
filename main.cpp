@@ -13,10 +13,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	SystemMain system;
 	if (system.initialize())
 	{
-		while (!ScreenFlip() && !ProcessMessage() && !ClearDrawScreen()) {
-			game.update();
-			game.draw();
-		}
+		system.main();
 	}
 	
 	system.finalize();

@@ -1,26 +1,22 @@
 #pragma once
 #include"AbstractEnemy.h"
 #include<memory>
+
 #include"BulletManager.h"
 
 class BulletManager;
 
-class Enemy_A :public AbstractEnemy
+class Enemy_B :public AbstractEnemy
 {
 public:
-	Enemy_A();
-	Enemy_A(float x,float y);
-	~Enemy_A();
-
-	void draw() override;
-
+	Enemy_B();
+	Enemy_B(float x,float y);
+	~Enemy_B();
+	void draw()override;
 
 
 	
-	
-
 private:
-
-
+	
 };
 

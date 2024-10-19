@@ -1,45 +1,127 @@
 #pragma once
 #include"Task.h"
 #include<memory>
-#include"CircleCollider.h"
-class CircleCollider;
+#include<vector>
+#include"MovePatternEnemys.h"
+
+#include"BulletManager.h"
+
+class BulletManager;
+
+
+
 class AbstractEnemy:public Task
 {
 public:
-	AbstractEnemy();
+	AbstractEnemy(float x,float y);
 	virtual ~AbstractEnemy() = default;
 	bool update()override;
 
-	const float& GetX()
+
+	float& GetX()
 	{
 		return *_x;
 	}
-	const float& GetY()
+	 float& GetY()
 	{
 		return *_y;
 	}
-	const void SetX(float x)
+	void SetX(float x)
 	{
 		*_x = x;
 	}
 
-	const void SetY(float y)
+	 void SetY(float y)
 	{
 		*_y = y;
 	}
-	const bool Getvisible(bool flag)
+	 bool Getvisible(bool flag)
 	{
 		*visible = flag;
 		return *visible;
 	}
-	
+	 int Getcount()
+	{
+		return *count;
+	}
 
+	 void Setcount(int _count)
+	{
+		*count = _count;
+	}
+
+	 float Getangle1()
+	{
+		return *_angle1;
+	}
+	 void Setangle1(float angle1)
+	{
+		*_angle1 = angle1;
+	}
+	 float Getangle2()
+	{
+		return *_angle2;
+	}
+	 void Setangle2(float angle2)
+	{
+		*_angle2 = angle2;
+	}
+	float Getspeed()
+	{
+		return *_speed;
+	}
+	const void Setspeed(float  speed)
+	{
+		*_speed = speed;
+	}
+	int Getpattern() {
+		return *pattern;
+	}
+	 void Setpattern(int _pattern)
+	{
+		*pattern = _pattern;
+	}
+	 void SetCounterB(int  _counterb)
+	 {
+		 *counterbullet = _counterb;
+	 }
+	 int GetCounterB()
+	 {
+		 return *counterbullet;
+	 }
+	 int GetSelection()
+	 {
+		 return *selection;
+	 }
+	 void SetSelection(int _selection)
+	 {
+		 *selection = _selection;
+	 }
+	 bool GetFlag()
+	 {
+		 return *shotflag;
+	 }
+	 void SetFlag(bool flag)
+	 {
+		 *shotflag = flag;
+	 }
 protected:
+	std::vector<float> _vx;
+	std::vector<float> _vy;
 	std::unique_ptr<float>_x;
 	std::unique_ptr<float>_y;
+	std::unique_ptr<float>_angle1;
+	std::unique_ptr<float>_angle2;
+	std::unique_ptr<float>_speed;
 	std::unique_ptr<int>handle;
 	std::unique_ptr<bool>visible;
+	std::unique_ptr<int>count;
+	std::unique_ptr<int>pattern;
+	std::unique_ptr<int>counterbullet;
+	std::unique_ptr<int>bulletpattern;
+	std::unique_ptr<int>selection;
+	std::unique_ptr<bool>shotflag;
 	void move();
-
+	
 };
 

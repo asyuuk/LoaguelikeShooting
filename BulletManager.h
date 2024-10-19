@@ -1,35 +1,43 @@
 #pragma once
-#include"Player.h"
-#include"Enemy_A.h"
+
+#include"AbstractEnemy.h"
 #include<memory>
-class Player;
-class Enemy_A;
+#include<vector>
+
+class AbstractEnemy;
 class BulletManager
 {
 public:
 	BulletManager();
-	~BulletManager() = default;;
+	~BulletManager() = default;
 
 	void set(int x) {
 		*selection = x;
 	}
-	int GetSelection() {
-		return *selection;
-	}
+	void shot(AbstractEnemy* enemy);
 
-	void BulletSelect(int _selection);
+	void BulletSelect(AbstractEnemy* enemy);
 
-	void BulletDraw(int _selecition);
+	void BulletDraw(AbstractEnemy* enemy);
+
+
+
 
 private:
+
+	void SetPattern();
+	typedef void(BulletManager::* FUNC)(AbstractEnemy* enemy);
 	std::unique_ptr<int> selection;
-	Player playerbullet;
-	Enemy_A enemy_abullet;
+	std::vector<FUNC>_shotpattern;
+	
+
 };
 
 enum
 {
 	Random,
 	Circle,
+	Toward,
+	Horming,
 	Shot_End
 };

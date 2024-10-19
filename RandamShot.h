@@ -8,8 +8,8 @@ class RandamShot:public Task_B
 public:
 	RandamShot();
 	virtual ~RandamShot();
-	bool Initialize(float _x, float _y)override;
-	virtual bool update(float _x, float _y)override;
+	bool Initialize(float px,float py,float _x, float _y)override;
+	virtual bool update(float px,float py,float _x, float _y)override;
 	virtual void Draw()const override;
 	void SetX(float x[]);
 	void SetY(float y[]);
@@ -28,6 +28,7 @@ private:
 	std::unique_ptr<int>gamecount2;
 	std::unique_ptr<int[]>x;
 	std::unique_ptr<int[]>y;
+	Enemy_A enemyA_Randombullet;
 
 };
 

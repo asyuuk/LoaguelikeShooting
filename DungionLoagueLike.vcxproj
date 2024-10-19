@@ -139,26 +139,40 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AbstractBullets.cpp" />
     <ClCompile Include="AbstractEnemy.cpp" />
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="BulletManager.cpp" />
     <ClCompile Include="CircleCollider.cpp" />
     <ClCompile Include="CircleShot.cpp" />
+    <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="Enemy_A.cpp" />
+    <ClCompile Include="Enemy_B.cpp" />
+    <ClCompile Include="Enemy_C.cpp" />
     <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="Hormingbullet.cpp" />
+    <ClCompile Include="InitTowardShot.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MovePatternEnemys.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RandamShot.cpp" />
     <ClCompile Include="SystemMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AbstractBullets.h" />
     <ClInclude Include="AbstractEnemy.h" />
     <ClInclude Include="BackGround.h" />
     <ClInclude Include="BulletManager.h" />
     <ClInclude Include="CircleCollider.h" />
     <ClInclude Include="CircleShot.h" />
+    <ClInclude Include="EnemyManager.h" />
     <ClInclude Include="Enemy_A.h" />
+    <ClInclude Include="Enemy_B.h" />
+    <ClInclude Include="Enemy_C.h" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="Hormingbullet.h" />
+    <ClInclude Include="InitTowardShot.h" />
+    <ClInclude Include="MovePatternEnemys.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RandamShot.h" />
     <ClInclude Include="Singleton.h" />

@@ -1,15 +1,17 @@
 #include "Player.h"
 #include<DxLib.h>
 
-CircleCollider PCol;
+
+
 Player::Player()
 {
 	_x = std::make_unique<float>();
 	_y = std::make_unique<float>();
 	handle = std::make_unique<int>();
-
-	*_x = 0;
-	*_y = 0;
+	speed = std::make_unique<float>();
+	*_x = 150;
+	*_y = 350;
+	*speed = 3.0f;
 	*handle = 0;
 	
 }
@@ -21,35 +23,43 @@ Player::~Player()
 bool Player::update()
 {
 	move();
+
 	return true;
 }
 
 void  Player::draw()
 {
-
-	*handle = LoadGraph("E:\\Aseprite\\bluearchiveyuuka.png");
-	if (PCol.Player_EnemyA_update()) {
-		DrawGraph(*_x, *_y, *handle, TRUE);
-	}
 	
+	*handle = LoadGraph("E:\\Aseprite\\chara0002.png");
+ 
+	DrawGraph(*_x, *_y, *handle, TRUE);
+	
+	
+}
+
+void Player::Bulletdraw()
+{
+
 }
 
 void Player::move()
 {
 	if (CheckHitKey(KEY_INPUT_W))
 	{
-		*_y -= 2;
+		*_y -= *speed;
 	}
 	if (CheckHitKey(KEY_INPUT_S))
 	{
-		*_y += 2;
+		*_y += *speed;
 	}
 	if (CheckHitKey(KEY_INPUT_D))
 	{
-		*_x += 2;
+		*_x += *speed;
 	}
 	if (CheckHitKey(KEY_INPUT_A))
 	{
-		*_x -= 2;
+		*_x -= *speed;
 	}
+
+
 }

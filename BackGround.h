@@ -1,14 +1,15 @@
 #pragma once
 #include"Task.h"
 #include<memory>
-class BackGround : public Task
+class BackGround 
 {
 public:
 	
 	BackGround();
 	virtual ~BackGround();
-	void draw() override;
-	bool update()override;
+	void draw() ;
+	void drawback();
+	bool update();
 	float& GetX() { return *_x; }
 	float& GetY() { return *_y; }
 	float& SetX(float x) { *_x = x; }

@@ -6,10 +6,14 @@ BackGround::BackGround()
 	_y = std::make_unique<float>(0);
 	handle = std::make_unique<int>(0);
 	handlemake = std::make_unique<int>(0);
+
+	
+
 }
 BackGround::~BackGround()
 {
 	DeleteGraph(*handle);
+	DeleteGraph(*handlemake);
 }
 
 bool BackGround::update()
@@ -21,9 +25,20 @@ bool BackGround::update()
 void BackGround::draw()
 {
 	*handle = LoadGraph("E:\\Aseprite\\haikei_game.png");
-	*handlemake = MakeScreen(284, 448, FALSE);
+	*handlemake = MakeScreen(384, 448, FALSE);
+	
 	SetDrawScreen(*handlemake);
+	
+	
 
-	DrawGraph(*_x, *_y, *handle, true);
+}
+
+void BackGround::drawback()
+{
+	SetDrawScreen(DX_SCREEN_BACK);
+	DrawGraph(0, 0, *handle, FALSE);
 	DrawGraph(32, 16, *handlemake, FALSE);
 }
+
+
+

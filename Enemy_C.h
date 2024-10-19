@@ -5,22 +5,17 @@
 
 class BulletManager;
 
-class Enemy_A :public AbstractEnemy
+class Enemy_C :public AbstractEnemy
 {
 public:
-	Enemy_A();
-	Enemy_A(float x,float y);
-	~Enemy_A();
+	Enemy_C();
+	Enemy_C(float x,float y);
+	~Enemy_C();
+	void draw()override;
 
-	void draw() override;
-
-
-
-	
 	
 
 private:
-
-
+	
 };
 
