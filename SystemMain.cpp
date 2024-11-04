@@ -1,20 +1,18 @@
 #include "SystemMain.h"
 #include<DxLib.h>
-#include"GameScene.h"
-GameScene gamescene;
-SystemMain::SystemMain()
-{
-	handle = std::make_unique<int>(0);
-}
 
-bool SystemMain::initialize()const
+bool SystemMain::initialize() const
 {
+	SetAlwaysRunFlag(TRUE);
+	SetWindowSizeChangeEnableFlag(TRUE);
+	SetFullScreenResolutionMode(DX_FSRESOLUTIONMODE_DESKTOP);
+	SetWindowText("!");
 	ChangeWindowMode(TRUE);
 	if (DxLib_Init())
 	{
 		return false;
 	}
-	
+	SetDrawScreen(DX_SCREEN_BACK);
 	return true;
 }
 
@@ -27,10 +25,7 @@ void SystemMain::main()const
 {
 	while (!ScreenFlip() && !ProcessMessage() && !ClearDrawScreen())
 	{
-		gamescene.update();
-		gamescene.draw();
+		if(CheckHitKey(KEY_INPUT_Z))
+		break;
 	}
 }
-
-
-

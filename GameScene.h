@@ -1,20 +1,6 @@
 #pragma once
-#include"Player.h"
-
-#include"Enemy_A.h"
-#include"Enemy_B.h"
-#include"CircleCollider.h"
-#include"CircleShot.h"
-#include"BackGround.h"
+//ゲームシーンにおける敵やプレイヤーの動き、描画などを更新する為のもの。
 class GameScene
 {
-public:
-	GameScene();
-	virtual ~GameScene() = default;
-	void update();
-	void draw();
-private:
-	
-
 };
 
