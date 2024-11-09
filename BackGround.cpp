@@ -1,18 +1,19 @@
 #include "BackGround.h"
 #include<DxLib.h>
+#include"Image.h"
 BackGround::BackGround()
 {
 	_x = std::make_unique<float>(0);
 	_y = std::make_unique<float>(0);
 	handle = std::make_unique<int>(0);
 	handlemake = std::make_unique<int>(0);
-
+	width = std::make_unique<int>(448);
+	height = std::make_unique<int>(384);
 	
 
 }
 BackGround::~BackGround()
 {
-	DeleteGraph(*handle);
 	DeleteGraph(*handlemake);
 }
 
@@ -24,10 +25,8 @@ bool BackGround::update()
 
 void BackGround::draw()
 {
-	*handle = LoadGraph("E:\\Aseprite\\haikei_game.png");
-	*handlemake = MakeScreen(384, 448, FALSE);
 	
-	SetDrawScreen(*handlemake);
+	SetDrawArea(0, 0, *width, *height);
 	
 	
 
@@ -36,8 +35,8 @@ void BackGround::draw()
 void BackGround::drawback()
 {
 	SetDrawScreen(DX_SCREEN_BACK);
-	DrawGraph(0, 0, *handle, FALSE);
-	DrawGraph(32, 16, *handlemake, FALSE);
+	DrawGraph(*width, 0,Image::GetInst()->getbackground(), FALSE);
+	DrawGraph(0, *height, Image::GetInst()->getbackground(), FALSE);
 }
 
 

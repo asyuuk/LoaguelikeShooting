@@ -2,22 +2,22 @@
 #include"Enemy_A.h"
 #include"Enemy_B.h"
 #include"Enemy_C.h"
-#include"Player.h"
 #include<Dxlib.h>
-#include"CircleCollider.h"
+#include"definestruct.h"
+
 using namespace std;
-CircleCollider c;
-Player _P;
 EnemyManager::EnemyManager()
 {
-	_list.emplace_back(make_shared<Enemy_A>(10,-10));
-	_list.emplace_back(make_shared<Enemy_A>(50,-10));
-	_list.emplace_back(make_shared<Enemy_A>(100,-10));
-	_list.emplace_back(make_shared<Enemy_A>(150, -10));
-	_list.emplace_back(make_shared<Enemy_A>(200, -10));
+	_list.emplace_back(make_shared<Enemy_A>(10, -10));
+	_list.emplace_back(make_shared<Enemy_A>(EnemyX, EnemyY));
+	_list.emplace_back(make_shared<Enemy_A>(EnemyX_1, EnemyY));
+	_list.emplace_back(make_shared<Enemy_A>(EnemyX_2, EnemyY));
+	_list.emplace_back(make_shared<Enemy_A>(EnemyX_3, EnemyY));
+	_P = std::make_unique<Player>();
 	
-
 }
+
+
 
 bool EnemyManager::update()
 {
@@ -33,33 +33,26 @@ bool EnemyManager::update()
 		}
 	}
 	
-
+	
 	return true;
 
 }
 
-void  EnemyManager::draw()
+void  EnemyManager::draw() const
 {
-	_P.update();
+	
 	for (const auto enemy : _list)
 	{
 		
-		if (c.Player_EnemyA_update(_P.GetX(), _P.GetY(), enemy->GetX(), enemy->GetY())) {
+		
 			enemy->draw();
-		}
 		
 		
-		if (c.Player_EnemyA_update(_P.GetX(),_P.GetY(),enemy->GetX(),enemy->GetY()))
-		{
-			_P.draw();
-		}
+		
+		
+			_P->draw();
+		
 			
 	}
-}
-void EnemyManager::Bulletdraw()
-{
-	for (const auto enemy : _list)
-	{
-		enemy->Bulletdraw();
-	}
+	
 }

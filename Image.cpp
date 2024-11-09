@@ -3,25 +3,29 @@
 
 Image::Image()
 {
-	player = std::make_unique<int>();
-	enemy = std::make_unique<int>();
-	*player = LoadGraphs("E:\\Aseprite\\bluearchiveyuuka.png");
-	*enemy = LoadGraphs("E:\\Aseprite\\bluearchiveyuuka.png");
+	_player = std::make_unique<int>();
+	_enemy_a = std::make_unique<int>();
+	_background = std::make_unique<int>();
+	*_player = myLoadGraph("E:\\Aseprite\\chara0002.png");
+	*_enemy_a = myLoadGraph("E:\\Aseprite\\bluearchiveyuuka.png");
+	*_background = myLoadGraph("E:\\Aseprite\\haikei_game.png");
+
 }
 
-int& Image::LoadGraphs(const char * filename)
+
+int Image::myLoadGraph(const char * filename)
 {
 	int ret = LoadGraph(filename);
-	Images.push_back(ret);
+	_image.push_back(ret);
 	return ret;
 }
 
 void Image::release()
 {
-	const int size = Images.size();
+	const int size =_image.size();
 	for (int i = 0; i < size; i++)
 	{
-		DeleteGraph(Images[i]);
+		DeleteGraph(_image[i]);
 	}
-	Images.clear();
+	_image.clear();
 }

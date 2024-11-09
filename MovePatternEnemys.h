@@ -9,11 +9,8 @@ class MovePatternEnemys
 public:
 
 	MovePatternEnemys();
-	~MovePatternEnemys() = default;
-
+	virtual ~MovePatternEnemys() = default;
 	
-
-	void update();
 	void move(AbstractEnemy* enemy);
 private:
 	typedef void (MovePatternEnemys::* FUNC)(AbstractEnemy* enemy);

@@ -1,5 +1,6 @@
 #include "MovePatternEnemys.h"
 #include<DxLib.h>
+#include"AbstractEnemy.h"
 
 
 

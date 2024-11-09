@@ -4,65 +4,64 @@
 #include<vector>
 #include"MovePatternEnemys.h"
 
-#include"BulletManager.h"
 
-class BulletManager;
-
-
+class MovePatternEnemys;
 
 class AbstractEnemy:public Task
 {
 public:
-	AbstractEnemy(float x,float y);
+	AbstractEnemy();
+	AbstractEnemy(int _x,int _y);
 	virtual ~AbstractEnemy() = default;
+
 	bool update()override;
 
 
-	float& GetX()
+	int GetX()
 	{
-		return *_x;
+		return *x;
 	}
-	 float& GetY()
+	int GetY()
 	{
-		return *_y;
+		return *y;
 	}
-	void SetX(float x)
+	void SetX(float _x)
 	{
-		*_x = x;
+		*x = _x;
 	}
 
-	 void SetY(float y)
+	void SetY(float _y)
 	{
-		*_y = y;
+		*y = _y;
 	}
-	 bool Getvisible(bool flag)
+	bool Getvisible(bool flag)
 	{
 		*visible = flag;
 		return *visible;
 	}
-	 int Getcount()
+	int Getcount()
 	{
 		return *count;
 	}
 
-	 void Setcount(int _count)
+	void Setcount(int _count)
 	{
 		*count = _count;
 	}
 
-	 float Getangle1()
+	float Getangle1()
 	{
 		return *_angle1;
 	}
-	 void Setangle1(float angle1)
+	void Setangle1(float angle1)
 	{
 		*_angle1 = angle1;
 	}
-	 float Getangle2()
+	float Getangle2()
 	{
 		return *_angle2;
 	}
-	 void Setangle2(float angle2)
+	void Setangle2(float angle2)
 	{
 		*_angle2 = angle2;
 	}
@@ -77,43 +76,44 @@ public:
 	int Getpattern() {
 		return *pattern;
 	}
-	 void Setpattern(int _pattern)
+	void Setpattern(int _pattern)
 	{
 		*pattern = _pattern;
 	}
-	 void SetCounterB(int  _counterb)
-	 {
-		 *counterbullet = _counterb;
-	 }
-	 int GetCounterB()
-	 {
-		 return *counterbullet;
-	 }
-	 int GetSelection()
-	 {
-		 return *selection;
-	 }
-	 void SetSelection(int _selection)
-	 {
-		 *selection = _selection;
-	 }
-	 bool GetFlag()
-	 {
-		 return *shotflag;
-	 }
-	 void SetFlag(bool flag)
-	 {
-		 *shotflag = flag;
-	 }
+	void SetCounterB(int  _counterb)
+	{
+		*counterbullet = _counterb;
+	}
+	int GetCounterB()
+	{
+		return *counterbullet;
+	}
+	int GetSelection()
+	{
+		return *selection;
+	}
+	void SetSelection(int _selection)
+	{
+		*selection = _selection;
+	}
+	bool GetFlag()
+	{
+		return *shotflag;
+	}
+	void SetFlag(bool flag)
+	{
+		*shotflag = flag;
+	}
+
 protected:
-	std::vector<float> _vx;
-	std::vector<float> _vy;
-	std::unique_ptr<float>_x;
-	std::unique_ptr<float>_y;
-	std::unique_ptr<float>_angle1;
-	std::unique_ptr<float>_angle2;
-	std::unique_ptr<float>_speed;
-	std::unique_ptr<int>handle;
+	std::vector<int> _vx;
+	std::vector<int> _vy;
+	std::unique_ptr<int>x;
+	std::unique_ptr<int>y;
+	std::unique_ptr<int>_angle1;
+	std::unique_ptr<int>_angle2;
+	std::unique_ptr<int>_speed;
+	std::unique_ptr<int>Bhandle;
 	std::unique_ptr<bool>visible;
 	std::unique_ptr<int>count;
 	std::unique_ptr<int>pattern;
@@ -121,7 +121,9 @@ protected:
 	std::unique_ptr<int>bulletpattern;
 	std::unique_ptr<int>selection;
 	std::unique_ptr<bool>shotflag;
-	void move();
-	
+	std::unique_ptr<int>handle;
+
+	std::shared_ptr<MovePatternEnemys>move;
+
 };
 

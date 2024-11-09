@@ -1,15 +1,11 @@
 #include "CircleCollider.h"
-#include"player.h"
-#include"CircleShot.h"
-#include"Enemy_A.h"
-#include"RandamShot.h"
+
 #include<DxLib.h>
 #include<math.h>
-Player _player;
-Enemy_A  EAc;
-Enemy_B EBc;
-RandamShot randomcollider;
-CircleShot circleshotcollider;
+#include"Enemy_A.h"
+#include"Player.h"
+#include"Enemy_B.h"
+
 
 CircleCollider::CircleCollider()
 {
@@ -19,6 +15,12 @@ CircleCollider::CircleCollider()
 	_y1_2 = std::make_unique<float>(0);
 	_bx = std::make_unique<float[]>(2560);
 	_by = std::make_unique<float[]>(2560);
+	_player = std::make_unique<Player>();
+	EAc = std::make_unique<Enemy_A>();
+
+
+	Flag = std::make_unique<Enemy_A>();
+
 	for (int i=0;i<2560;i++)
 	{
 		auto& ity = _by[i];
@@ -36,23 +38,7 @@ bool CircleCollider::Player_EnemyA_update(float x,float  y,float ex,float ey)
 }
 
 
-bool CircleCollider::Player_Bullet_update(float x,float y,float ex[], float ey[])
-{
 
-
-	
-
-	
-	return BulletsColliders(x,y,ex, ey);
-}
-
-bool CircleCollider::Player_Bullet_update_Random()
-{
-	
-	randomcollider.Initialize((float)_player.GetX(), (float)_player.GetY(),randomcollider.GetX(),randomcollider.GetY());
-
-	return Colliders(_player.GetX(), _player.GetY(), randomcollider.GetX(), randomcollider.GetY());
-}
 bool CircleCollider::Colliders(float _x, float _y, float _x2, float _y2)
 {
 

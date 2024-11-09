@@ -13,8 +13,8 @@ public:
 	Player();
 	~Player();
 	bool update()override;
-	void draw() override;
-	void Bulletdraw()override;
+	void draw()const override;
+
 	 float& GetX()
 	{
 		return *_x;

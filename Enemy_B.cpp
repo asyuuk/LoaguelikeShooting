@@ -1,30 +1,25 @@
 #include "Enemy_B.h"
 #include<DxLib.h>
-BulletManager BEbullet;
 
-Enemy_B::Enemy_B() :AbstractEnemy(0, 0)
+
+Enemy_B::Enemy_B():AbstractEnemy()
 {
-
+	*pattern = 2;
 }
 
-Enemy_B::Enemy_B(float x,float y):AbstractEnemy(x,y)
+Enemy_B::Enemy_B(float _x,float _y):AbstractEnemy(_x,_y)
 {
-	*_x = x;
-	*_y = y;
+	*x = _x;
+	*y = _y;
 	*pattern = 2;
 	*selection = 1;
 }
-Enemy_B::~Enemy_B()
-{
-	*handle = 0;
-	DeleteGraph(*handle);
-}
-void Enemy_B::draw()
+void Enemy_B::draw()const
 {
 	*handle = LoadGraph("E:\\Aseprite\\chara0001.png");
 
-	
-	DrawGraph((float)*_x, (float)*_y, *handle, TRUE);
-	
-	
+
+	DrawGraph((float)*x, (float)*y, *handle, TRUE);
+
 }
+

@@ -19,5 +19,7 @@ private:
 	std::unique_ptr<float>_y;
 	std::unique_ptr<int>handle;
 	std::unique_ptr<int>handlemake;
+	std::unique_ptr<int>width;
+	std::unique_ptr<int>height;
 };
 

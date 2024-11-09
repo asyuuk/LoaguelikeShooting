@@ -8,7 +8,7 @@ protected:
 	Singleton(const Singleton& r) = default;
 
 public:
-	static _T* Instance()
+	static _T* GetInst()
 	{
 		static _T inst;
 		return &inst;

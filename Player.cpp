@@ -1,5 +1,6 @@
 #include "Player.h"
 #include<DxLib.h>
+#include"Image.h"
 
 
 
@@ -27,20 +28,16 @@ bool Player::update()
 	return true;
 }
 
-void  Player::draw()
+void  Player::draw() const
 {
 	
-	*handle = LoadGraph("E:\\Aseprite\\chara0002.png");
- 
-	DrawGraph(*_x, *_y, *handle, TRUE);
+	
+	DrawGraph(*_x, *_y, Image::GetInst()->getPlayer(), TRUE);
 	
 	
 }
 
-void Player::Bulletdraw()
-{
 
-}
 
 void Player::move()
 {

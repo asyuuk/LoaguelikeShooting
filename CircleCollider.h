@@ -2,8 +2,12 @@
 
 #include<memory>
 #include"player.h"
+#include"Enemy_A.h"
+
 
 class Player;
+class  Enemy_A;
+
 
 
 class CircleCollider
@@ -32,7 +36,9 @@ private:
 	std::unique_ptr<float>_y1_2;
 	std::unique_ptr<float[]>_bx;
 	std::unique_ptr<float[]>_by;
-
-	Enemy_A Flag;
+	std::unique_ptr<Player> _player;
+	std::unique_ptr<Enemy_A>  EAc;
+	
+	std::unique_ptr<Enemy_A> Flag;
 };
 
