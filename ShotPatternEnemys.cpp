@@ -1,12 +1,13 @@
 #include "ShotPatternEnemys.h"
 #include<DxLib.h>
-#include"EnemyManager.h"
+
+#include"MovePatternEnemys.h"
 
 
 ShotPatternEnemys::ShotPatternEnemys()
 {
 	_player = std::make_shared<Player>();
-	_em = std::make_shared<EnemyManager>();
+	
 
 	SetFunction();
 }
@@ -15,9 +16,6 @@ void ShotPatternEnemys::shot(AbstractBullets* bullets)
 {
 	const unsigned int pattern = bullets->GetPatternB();
 	(this->*_bullet[pattern])(bullets);
-	bullets->SetX(bullets->Get_X(2560) + cos(bullets->Getangle1(2560)) * bullets->Getspeed());
-	bullets->SetY(bullets->Get_Y(2560) + sin(bullets->Getangle1(2560)) * bullets->Getspeed());
-	
 	
 }
 
@@ -33,45 +31,52 @@ void ShotPatternEnemys::SetFunction()
 
 void ShotPatternEnemys::Circle(AbstractBullets* bullets)
 {
-	
-	_em->update();
-	_player->update();
-	bullets->Setmax(40);
-	for (int i = 0; i < bullets->Getcount1(); i++)
-	{
-		bullets->angle[i] = (18 * i) * DX_PI / 180;
-		bullets->angle[i + bullets->Getcount1()] = (18 * i) * DX_PI / 180;
-		bullets->angle2[i] = ((18 * i) + 4) * DX_PI / 180;
-		bullets->angle2[i + bullets->Getcount1()] = ((18 * i) - 4) * DX_PI / 180;
 
-	}
-	
-
-	for (int i = 0; i < bullets->Getmax(); i++)
+	if (bullets->GetFlag() == false)
 	{
-		if (bullets->_x[i]<80 && bullets->_x[i]>-80 && bullets->_y[i]<80 && bullets->_y[i]>-80)
+		
+		*bullets->countgame2 = *bullets->countgame;
+		for (int i = 0; i < 20; i++)
 		{
-			bullets->_x[i] += cos(bullets->angle[i % 40]) * 2;
-			bullets->_y[i] += sin(bullets->angle[i % 40]) * 2;
+			bullets->angle[i] = (18 * i) * DX_PI / 180;
+			bullets->angle[i + 20] = (18 * i) * DX_PI / 180;
+			bullets->angle2[i] = ((18 * i) + 4) * DX_PI / 180;
+			bullets->angle2[i + 20] = ((18 * i) - 4) * DX_PI / 180;
+
 		}
-		else
-		{
-			bullets->_x[i] += cos(bullets->angle2[i % 40]) * 2;
-			bullets->_y[i] += sin(bullets->angle2[i % 40]) * 2;
-		}
+		
+		bullets->SetFlag(true);
 	}
-	if (bullets->countgame == bullets->countgame2)
+	
+	
+	if (bullets->GetFlag() == true) 
 	{
-		if (bullets->Getmax() < 280) {
-			bullets->Setmax(bullets->Getmax() + 20);
-			bullets->SetCountgame2(bullets->GetCountgame2() + 20);
+		for (int i = 0; i < *bullets->max; i++)
+		{
+			if (bullets->_x[i]<100 && bullets->_x[i]>-100 && bullets->_y[i]<100 && bullets->_y[i]>-100)
+			{
+				bullets->_x[i] += cos(bullets->angle[i % 40]) * 1;
+				bullets->_y[i] += sin(bullets->angle[i % 40]) * 1;
+			}
+			else
+			{
+				bullets->_x[i] += cos(bullets->angle2[i % 40]) * 1;
+				bullets->_y[i] += sin(bullets->angle2[i % 40]) * 1;
+			}
 		}
+		if (*bullets->countgame == *bullets->countgame2+80&&*bullets->initflag==true)
+		{
+			if (*bullets->max < 280) {
+				*bullets->max += 40;
+				*bullets->gamecount2 += 80;
+			}
 
 
 
-
+		}
 	}
-	bullets->SetCountgame(bullets->GetCountgame());
+	
+	
 	
 
 }
@@ -79,12 +84,6 @@ void ShotPatternEnemys::Circle(AbstractBullets* bullets)
 void ShotPatternEnemys::Random(AbstractBullets* bullets)
 {
 	
-	_player->update();
-	for (int i = 0; i < 2000; i++)
-	{
-		bullets->_x[i] = bullets->GetX();
-		bullets->_y[i] = bullets->GetY();
-	}
 	for (int i = 0; i < 2000; i++)
 	{
 		bullets->angle[i] = ((rand() % 360) * (DX_PI / 180));
@@ -97,8 +96,8 @@ void ShotPatternEnemys::Random(AbstractBullets* bullets)
 	for (int i = 0; i < bullets->Getmax(); i++)
 	{
 
-		bullets->_x[i] += (cos(bullets->angle[i]) * bullets->var[i]) / 3;
-		bullets->_y[i] += (sin(bullets->angle[i]) * bullets->var[i]) / 3;
+		bullets->_x[i] += (cos(bullets->angle[i]) * (bullets->var[i]) / 2);
+		bullets->_y[i] += (sin(bullets->angle[i]) * (bullets->var[i]) / 2);
 	}
 	if (bullets->countgame == bullets->countgame2)
 	{
@@ -124,13 +123,7 @@ void ShotPatternEnemys::Toward(AbstractBullets* bullets)
 		bullets->angle2[i] = (25 * i) * DX_PI / 180;
 		bullets->angle2[i + bullets->Getcount()] = ((10 * i) - 4) * DX_PI / 180;
 	}
-	for (int i = 0; i < 300; i++)
-	{
-		bullets->_x[i] = bullets->GetX();
-		bullets->_y[i] = bullets->GetY();
-
-
-	}
+	
 	for (int i = 0; i < bullets->Getmax(); i++)
 	{
 

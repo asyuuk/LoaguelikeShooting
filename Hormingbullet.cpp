@@ -3,7 +3,7 @@
 #include"Player.h"
 #include"AbstractBullets.h"
 
-Hormingbullet::Hormingbullet()
+Hormingbullet::Hormingbullet():AbstractBullets()
 {
 	
 

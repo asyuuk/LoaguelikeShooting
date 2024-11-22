@@ -3,10 +3,6 @@
 #include"AbstractEnemy.h"
 
 
-Enemy_C::Enemy_C() :AbstractEnemy()
-{
-	*pattern = 3;
-}
 
 
 
@@ -16,7 +12,7 @@ Enemy_C::Enemy_C(float _x,float _y):AbstractEnemy(_x,_y)
 	*y = _y;
 	
 	*pattern = 3;
-	*selection = 2;
+
 }
 
 

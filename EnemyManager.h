@@ -19,11 +19,20 @@ public:
 	virtual ~EnemyManager() = default;
 	bool update() override;
 	void draw()const override;
+	void SetEnemys();
 	
+	int GetCount()
+	{
+		return *count;
+	}
+	void SetCount(int x)
+	{
+		*count += x;
+	}
 
-private:
+protected:
 	std::list<std::shared_ptr<AbstractEnemy>>_list;
-	
+	std::unique_ptr<int>count;
 
 	std::unique_ptr<CircleCollider> c;
 	std::unique_ptr<Player> _P;

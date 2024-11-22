@@ -1,10 +1,5 @@
 #pragma once
 #include"AbstractEnemy.h"
-#include<memory>
-#include"AbstractBullets.h"
-
-class AbstractBullets;
-
 
 class Enemy_A final :public AbstractEnemy
 {

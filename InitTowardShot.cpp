@@ -7,13 +7,6 @@
 
 
 
-InitTowardShot::InitTowardShot() :AbstractBullets()
-{
-	
-	SetPatternB(2);
-	
-}
-
 
 void InitTowardShot::draw()const
 {

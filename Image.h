@@ -12,7 +12,11 @@ public:
 	int getPlayer() const { return *_player; }
 	int getenemyA() const { return *_enemy_a; }
 	int getbackground() const { return *_background; }
-
+	int getenemyshot()const { return *_enemyshot; }
+	int getbullet()const {
+		return *_bullethandle;
+	}
+	
 
 private:
 	int myLoadGraph(const char*);
@@ -26,5 +30,7 @@ private:
 	std::unique_ptr<int>_enemy_c;
 	std::unique_ptr<int>_background;
 	std::unique_ptr<int>_handle;
+	std::unique_ptr<int>_enemyshot;
+	std::unique_ptr<int>_bullethandle;
 };
 

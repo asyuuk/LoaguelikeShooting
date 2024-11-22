@@ -15,7 +15,7 @@ public:
 private:
 	typedef void (MovePatternEnemys::* FUNC)(AbstractEnemy* enemy);
 	std::vector<FUNC>_movepattern;
-
+	
 	void SetFunction();
 
 	void MovePattern00(AbstractEnemy* enemy);

@@ -5,7 +5,6 @@
 #include"Task_B.h"
 #include<vector>
 
-
 class ShotPatternEnemys;
 
 
@@ -13,10 +12,10 @@ class AbstractBullets:public Task_B
 {
 public:
 	AbstractBullets();
-	AbstractBullets(int x, int y);
 	virtual ~AbstractBullets() = default;
 	bool update()override;
 	
+	bool visibleshot();
 
 
 	void Set_X(int x, int y)
@@ -51,9 +50,6 @@ public:
 		}
 	}
 
-	
-
-	
 
 	void Setmax(int x)
 	{
@@ -65,12 +61,16 @@ public:
 	}
 	int Getcount1()
 	{
+		
 		return *count1;
 
 	}
 	void Setcount1(int c)
 	{
-		*count1 = c;
+		int c2;
+		c2 += 1 + c;
+		*count1 = c2;
+
 	}
 	int Getcount()
 	{
@@ -102,7 +102,9 @@ public:
 
 	void Setcount(int _count)
 	{
-		*count = _count;
+		int c;
+		c += _count + 1;
+		*count = c;
 	}
 
 	float Getangle1(int x)
@@ -144,11 +146,15 @@ public:
 	}
 	void Setpattern(int _pattern)
 	{
+		int p;
+		p += _pattern + 1;
 		*pattern = _pattern;
 	}
 	void SetCounterB(int  _counterb)
 	{
-		*counterbullet = _counterb;
+		int count;
+		count += _counterb + 1;
+		*counterbullet = count;
 	}
 	int GetCounterB()
 	{
@@ -162,14 +168,7 @@ public:
 	{
 		*selection = _selection;
 	}
-	bool GetFlag()
-	{
-		return *shotflag;
-	}
-	void SetFlag(bool flag)
-	{
-		*shotflag = flag;
-	}
+	
 	int GetPatternB()
 	{
 		return *patternb;
@@ -181,38 +180,54 @@ public:
 
 	void SetCountgame2(int x)
 	{
-		*gamecount2 = x;
+		int game2=0;
+		game2 += x + 1;
+		*gamecount2 = game2;
 	}
 	int GetCountgame2()
 	{
+		*gamecount2 += 1;
 		return *gamecount2;
 	}
 
 	void SetCountgame(int x)
 	{
-		*gamecount = x+1;
+		int game=0;
+		game += x + 1;
+		*gamecount = game;
 	}
 	int GetCountgame()
 	{
+		*gamecount += 1;
 		return *gamecount;
 	}
 
 	void Setcounter(int x)
 	{
-		*counter = x;
+		int dcounter=0;
+		dcounter += x + 1;
+		*counter = dcounter;
 	}
 	int Getcounter()
 	{
+		*counter += 1;
 		return *counter;
 	}
 
-	
+	bool GetFlag()
+	{
+		return *initflag;
+	}
+	void SetFlag(bool init)
+	{
+		*initflag = init;
+	}
 
 	
 
 public:
-	std::unique_ptr<int[]>_y;
-	std::unique_ptr<int[]>_x;
+	std::unique_ptr<float[]>_y;
+	std::unique_ptr<float[]>_x;
 
 	std::unique_ptr<float>x;
 	std::unique_ptr<float>y;
@@ -247,10 +262,12 @@ public:
 	std::unique_ptr<float>playerX;
 	std::unique_ptr<float>playerY;
 	std::unique_ptr<float>EnemyX;
-	std::unique_ptr<float>EnemyY;
+	std::unique_ptr<float>EnemyY; 
 
+
+
+	std::unique_ptr<bool>initflag;
 	std::shared_ptr<ShotPatternEnemys>shot;
-
 
 };
 

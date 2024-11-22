@@ -3,16 +3,20 @@
 #include<memory>
 #include<vector>
 #include"MovePatternEnemys.h"
+#include"AbstractBullets.h"
 
+class AbstractBullets;
 
 class MovePatternEnemys;
 
-class AbstractEnemy:public Task
+class AbstractEnemy :public Task
 {
 public:
 	AbstractEnemy();
-	AbstractEnemy(int _x,int _y);
+	AbstractEnemy(float _x, float _y);
 	virtual ~AbstractEnemy() = default;
+
+	bool visibleEnemy();
 
 	bool update()override;
 
@@ -106,12 +110,11 @@ public:
 	}
 
 protected:
-	std::vector<int> _vx;
-	std::vector<int> _vy;
-	std::unique_ptr<int>x;
-	std::unique_ptr<int>y;
-	std::unique_ptr<int>_angle1;
-	std::unique_ptr<int>_angle2;
+
+	std::unique_ptr<float>x;
+	std::unique_ptr<float>y;
+	std::unique_ptr<float>_angle1;
+	std::unique_ptr<float>_angle2;
 	std::unique_ptr<int>_speed;
 	std::unique_ptr<int>Bhandle;
 	std::unique_ptr<bool>visible;
@@ -124,6 +127,6 @@ protected:
 	std::unique_ptr<int>handle;
 
 	std::shared_ptr<MovePatternEnemys>move;
-
+	std::shared_ptr<AbstractBullets>shot;
 };
 

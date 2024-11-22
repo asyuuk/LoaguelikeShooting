@@ -9,7 +9,8 @@ GameScene::GameScene()
 	EM = std::make_shared<EnemyManager>();
 	p = std::make_shared<Player>();
 	background = std::make_shared<BackGround>();
-	Shot = std::make_shared<ShotManager>();
+	S = std::make_shared<ShotManager>();
+	_SM = std::make_shared<Shot_MoveEnemymanager>();
 }
 
 void GameScene::update()
@@ -21,14 +22,14 @@ void GameScene::update()
 void GameScene::draw()
 {
 	background->draw();
-
-	EM->update();
+	//_SM->update();
+	//EM->update();
 	p->update();
-	Shot->update();
 	
+	//_SM->draw();
+	p->draw();
 	
-	EM->draw();
-	Shot->draw();
-
+	//EM->draw();
 	background->drawback();
+	
 }

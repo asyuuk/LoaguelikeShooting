@@ -7,8 +7,10 @@
 
 MovePatternEnemys::MovePatternEnemys()
 {
-	
+
 	SetFunction();
+	
+	
 }
 
 

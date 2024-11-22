@@ -2,17 +2,20 @@
 #include<DxLib.h>
 
 
-Enemy_B::Enemy_B():AbstractEnemy()
+Enemy_B::Enemy_B() :AbstractEnemy()
 {
-	*pattern = 2;
+	*x = 0;
+	*y = 0;
+
 }
+
 
 Enemy_B::Enemy_B(float _x,float _y):AbstractEnemy(_x,_y)
 {
 	*x = _x;
 	*y = _y;
 	*pattern = 2;
-	*selection = 1;
+
 }
 void Enemy_B::draw()const
 {

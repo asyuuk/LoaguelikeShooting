@@ -1,11 +1,14 @@
 #include "ShotManager.h"
 #include"CircleShot.h"
+#include"RandamShot.h"
 #include"definestruct.h"
 ShotManager::ShotManager()
 {
-	_list.emplace_back(std::make_shared<CircleShot>(10, -10));
-	_list.emplace_back(std::make_shared<CircleShot>(EnemyX, EnemyY));
-	_list.emplace_back(std::make_shared<CircleShot>(EnemyX_1, EnemyY));
+	_list.emplace_back(std::make_shared<CircleShot>());
+	_list.emplace_back(std::make_shared<CircleShot>());
+	_list.emplace_back(std::make_shared<CircleShot>());
+	_list.emplace_back(std::make_shared<CircleShot>());
+	_list.emplace_back(std::make_shared<CircleShot>());
 }
 
 bool ShotManager::update()
@@ -30,4 +33,17 @@ void ShotManager::draw()const
 	{
 		it->draw();
 	}
+}
+
+void ShotManager::SetShot()
+{
+	if (GetCount() == 40)
+	{
+		_list.emplace_back(std::make_shared<CircleShot>(250, 100));
+		_list.emplace_back(std::make_shared<CircleShot>(EnemyX, 100));
+		_list.emplace_back(std::make_shared<CircleShot>(EnemyX_1, 100));
+		_list.emplace_back(std::make_shared<CircleShot>(EnemyX_2, 100));
+		_list.emplace_back(std::make_shared<CircleShot>(EnemyX_3, 100));
+	}
+	
 }
